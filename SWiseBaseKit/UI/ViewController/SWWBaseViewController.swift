@@ -100,12 +100,14 @@ class SWWBaseViewController: UIViewController, SWWViewControllerDelegate {
         }
         nothingTipLabel.isHidden = isHiddenNothing
         
-        var backImageName = "SWiseKitResource.bundle/wise_base_kit_return"
-        if SWWBaseKitConfig.viewControllerBackItemImageName != nil {
-            backImageName = SWWBaseKitConfig.viewControllerBackItemImageName!
+        if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 {
+            var backImageName = "SWiseKitResource.bundle/wise_base_kit_return"
+            if SWWBaseKitConfig.viewControllerBackItemImageName != nil {
+                backImageName = SWWBaseKitConfig.viewControllerBackItemImageName!
+            }
+            
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:backImageName), style: .plain, target: self, action: #selector(leftButtonMethod))
         }
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:backImageName), style: .plain, target: self, action: #selector(leftButtonMethod))
     }
     
     override func viewWillAppear(_ animated: Bool) {
