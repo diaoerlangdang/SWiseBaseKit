@@ -11,6 +11,9 @@ import MJRefresh
 
 class SWWBaseTableViewController: SWWBaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /// 默认的tableview背景颜色
+    public static var defaultTableViewBgColor:UIColor? = nil
+    
     /** tableView */
     public var tableView:UITableView = UITableView()
     
@@ -90,6 +93,10 @@ class SWWBaseTableViewController: SWWBaseViewController, UITableViewDelegate, UI
             
             //默认footer header都有内边距
             tableView.contentInsetAdjustmentBehavior = .never
+        }
+        
+        if SWWBaseTableViewController.defaultTableViewBgColor != nil {
+            self.tableView.backgroundColor = SWWBaseTableViewController.defaultTableViewBgColor
         }
     }
     

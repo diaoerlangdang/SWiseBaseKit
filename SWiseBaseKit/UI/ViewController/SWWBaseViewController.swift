@@ -20,6 +20,22 @@ protocol SWWViewControllerDelegate {
 
 class SWWBaseViewController: UIViewController, SWWViewControllerDelegate {
     
+    
+    /// 返回按钮默认图片名称
+    public static var defaultReturnImageName:String? = nil
+    
+    
+    /// 背景默认颜色
+    public static var defaultBgColor:UIColor? = nil
+    
+    
+    /// 默认什么都没有显示的图片
+    public static var defaultNothingImageName:String? = nil
+
+    
+    /// 默认什么都没有显示提示语
+    public static var defaultNothingTip:String? = nil
+    
     /**
      * 当没有数据时显示提示图，默认隐藏
      */
@@ -85,6 +101,9 @@ class SWWBaseViewController: UIViewController, SWWViewControllerDelegate {
         if nothingImageName != nil {
             nothingImageView.image = UIImage(named: nothingImageName!)
         }
+        else if SWWBaseViewController.defaultNothingImageName != nil {
+            nothingImageView.image = UIImage(named: SWWBaseViewController.defaultNothingImageName!)
+        }
         nothingImageView.isHidden = isHiddenNothing
         
         self.view.addSubview(nothingTipLabel)
@@ -98,15 +117,23 @@ class SWWBaseViewController: UIViewController, SWWViewControllerDelegate {
         if nothingTip != nil {
             nothingTipLabel.text = nothingTip!
         }
+        else if SWWBaseViewController.defaultNothingTip != nil {
+            nothingImageView.image = UIImage(named: SWWBaseViewController.defaultNothingTip!)
+        }
         nothingTipLabel.isHidden = isHiddenNothing
         
         if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 {
+            
             var backImageName = "SWiseKitResource.bundle/wise_base_kit_return"
-            if SWWBaseKitConfig.viewControllerBackItemImageName != nil {
-                backImageName = SWWBaseKitConfig.viewControllerBackItemImageName!
+            if SWWBaseViewController.defaultReturnImageName != nil {
+                backImageName = SWWBaseViewController.defaultReturnImageName!
             }
             
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named:backImageName), style: .plain, target: self, action: #selector(leftButtonMethod))
+        }
+        
+        if SWWBaseViewController.defaultBgColor != nil {
+            self.view.backgroundColor = SWWBaseViewController.defaultBgColor
         }
     }
     

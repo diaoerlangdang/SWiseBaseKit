@@ -11,6 +11,9 @@ import MJRefresh
 
 class SWWBaseCollectionViewController: SWWBaseViewController,
                         UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
+    
+    /// 默认的collectionview背景颜色
+    public static var defaultCollectionViewBgColor:UIColor? = nil
 
     //collection view 布局
     public var collectionViewFlowLayout:UICollectionViewFlowLayout = UICollectionViewFlowLayout() {
@@ -70,6 +73,10 @@ class SWWBaseCollectionViewController: SWWBaseViewController,
         }
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
+        
+        if SWWBaseCollectionViewController.defaultCollectionViewBgColor != nil {
+            self.collectionView.backgroundColor = SWWBaseCollectionViewController.defaultCollectionViewBgColor
+        }
     }
     
     /**
